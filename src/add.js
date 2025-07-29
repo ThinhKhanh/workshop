@@ -4,6 +4,7 @@ import productRouter from "./routers/products.router.js";
 import categoriesRouter from "./routers/categories.router.js";
 import cartRouter from "./routers/cart.router.js";
 import { connectDB } from "./config/database.js";
+import userRouter from "./routers/user.router.js";
 
 dotenv.config();
 connectDB();
@@ -13,7 +14,9 @@ app.use(express.json());
 app.use('/products',productRouter);
 app.use('/category',categoriesRouter);
 app.use('/cart',cartRouter);
+app.use("/api/users", userRouter);
+
 
 app.listen(process.env.PORT, () => {
-  console.log(`Kết nối thành công tới server ${process.env.PORT}`);
+  console.log(`Kết nối thành công tới server:${process.env.PORT}`);
 });

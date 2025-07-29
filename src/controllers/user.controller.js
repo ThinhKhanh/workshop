@@ -1,91 +1,73 @@
-import User from "user.model";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import User from "../models/user.model.js";
 
-export const signup = async (req, res) => {
+export const userList = async (req, res) => {
   try {
-    const { userName, email, password, address, numberPhone, gender } =
-      req.body;
+    const users = await User.find();
+    if (!users.length) {
+      return res.status(200).json({ message: "Không có người dùng nào" });
+    }
+    return res.status(200).json({ message: "Danh sách người dùng", data: users });
+  } catch (error) {
+    return res.status(500).json({ message: "Lỗi server", error: error.message });
+  }
+};
 
-    const used = await User.findOne({ email });
-    if (used)
-      return res.status(400).json({
-        message: "Email này đã tông tại vui lòng thử lại!",
-      });
+export const getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user)
+      return res.status(404).json({ message: "Người dùng không tồn tại" });
 
-    const securityPassword = await bcrypt.hash(password, 10);
+    return res.status(200).json({ data: user });
+  } catch (error) {
+    return res.status(500).json({ message: "Lỗi server", error: error.message });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    return res.status(200).json({ message: "Xóa người dùng thành công" });
+  } catch (error) {
+    return res.status(500).json({ message: "Lỗi server", error: error.message });
+  }
+};
+
+export const createUser = async (req, res) => {
+  try {
+    const { userName, email, password, address, numberPhone, gender, roles } = req.body;
+
+    const exist = await User.findOne({ email });
+    if (exist) return res.status(400).json({ message: "Email đã tồn tại" });
+
+    const hashed = await bcrypt.hash(password, 10);
 
     const user = await User.create({
       userName,
       email,
-      password: securityPassword,
+      password: hashed,
       address,
       numberPhone,
       gender,
+      roles,
     });
-    securityPassword = undefined;
 
-    return res.status(201).json({
-      message: "Đăng ký thanh công!",
-      data: user,
-    });
+    res.status(201).json({ message: "Tạo người dùng thành công", data: user });
   } catch (error) {
-    return res.status(500).json({
-      message: "Lỗi không tạo được tài khoản!",
-      error: error.message,
-    });
+    res.status(500).json({ message: "Lỗi server", error: error.message });
   }
 };
 
-export const signin = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
-
-    const used = await User.findOne({ email });
-    if (!used)
-      return res.status(400).json({
-        message: "Tài khoản này không tồn tại!",
-      });
-
-    const passwordCompare = await bcrypt.compare(password, { user: password });
-    if (!passwordCompare)
-      return res.status(400).json({
-        message: "Nhập sai thông tin mật khẩu vui lòng thử lại!",
-      });
-
-    const user = jwt.sign({ user: _id }, process.env.KEYWORD, {
-      expiresIn: "1h",
+    const updated = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
     });
 
-    return res.status(200).json({
-      message: "Đăng nhập thành công!",
-      data: user,
-    });
+    if (!updated) return res.status(404).json({ message: "Không tìm thấy người dùng" });
+
+    res.status(200).json({ message: "Cập nhật thành công", data: updated });
   } catch (error) {
-    res.status(500).json({});
-  }
-};
-
-export const userList = async (req, res) => {
-  try {
-    const { _page = 1, _limit = 5 } = req.query;
-    const options = {
-      page: _page,
-      limit: _limit,
-    };
-    const userList = await User.paginate({}, options);
-    if (userList.length == 0)
-      return res.status(200).json({
-        message: "Hiện tại danh sách người dùng đang trống!",
-      });
-    return res.status(200).json({
-      message: "Danh sách người dùng",
-      data: userList,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: "Lỗi không thể tìm thấy dữu liệu!",
-      error: error.message,
-    });
+    res.status(500).json({ message: "Lỗi server", error: error.message });
   }
 };

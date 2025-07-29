@@ -1,4 +1,3 @@
-import { required } from "joi";
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
@@ -6,35 +5,42 @@ const userSchema = new mongoose.Schema(
   {
     userName: {
       type: String,
-      required: [true, "Trường này bắt buộc nhập!"],
+      required: [true, "Tên người dùng là bắt buộc"],
+      maxlength: 100,
+      trim: true,
     },
     email: {
       type: String,
-      unique: [true, "Trường này đã tồn tại!"],
-      required: [true, "Trường này bắt buộc nhập!"],
+      unique: [true, "Email đã tồn tại!"],
+      required: [true, "Email là bắt buộc"],
+      match: [/.+\@.+\..+/, "Email không đúng định dạng"],
     },
     password: {
       type: String,
-      unique: true,
-      required: [true, "Trường náy bắt buộc nhập!"],
+      required: [true, "Mật khẩu là bắt buộc"],
     },
     address: {
-      type: [String],
+      type: [String], // có thể để trống
     },
     numberPhone: {
       type: String,
       unique: true,
-      required: [true, "Trường này bắt buộc nhập!"],
+      required: [true, "Số điện thoại là bắt buộc"],
+      match: [/^(0|\+84)\d{9}$/, "Số điện thoại không hợp lệ"],
     },
     gender: {
       type: String,
       enum: ["nam", "nữ"],
-      default: "name",
+      default: "nam",
     },
     roles: {
       type: String,
       enum: ["admin", "user"],
       default: "user",
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false, 
     },
   },
   {
