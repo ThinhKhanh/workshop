@@ -5,6 +5,7 @@ import categoriesRouter from "./routers/categories.router.js";
 import cartRouter from "./routers/cart.router.js";
 import { connectDB } from "./config/database.js";
 import userRouter from "./routers/user.router.js";
+import authRouter from "./routers/auth.router.js";
 
 dotenv.config();
 connectDB();
@@ -15,6 +16,7 @@ app.use('/products',productRouter);
 app.use('/category',categoriesRouter);
 app.use('/cart',cartRouter);
 app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
 
 
 app.listen(process.env.PORT, () => {
