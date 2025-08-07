@@ -12,9 +12,9 @@ connectDB();
 const app = express();
 app.use(express.json());
 
-app.use('/products',productRouter);
-app.use('/category',categoriesRouter);
-app.use('/cart',cartRouter);
+app.use('/products', productRouter);
+app.use('/category', categoriesRouter);
+app.use('/cart', cartRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 

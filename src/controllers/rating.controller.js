@@ -1,29 +1,37 @@
-const Rating = require("../models/rating.model");
+import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
-exports.addRating = async (req, res) => {
-  const { productId, comment, star } = req.body;
-  const rating = await Rating.create({
-    productId,
-    userId: req.user.id,
-    comment,
-    star,
-  });
-  res.json(rating);
-};
+const ratingSchema = new mongoose.Schema(
+  {
+    customer_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    product_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+    },
+    rating_date: {
+      type: Date,
+    },
+    commit: {
+      type: String,
+    },
+    star: {
+      type: Number,
+      min: 1,
+      max: 5,
+      default: 1,
+    },
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
+);
 
-exports.getRatingsByProduct = async (req, res) => {
-  const ratings = await Rating.find({ productId: req.params.id });
-  res.json(ratings);
-};
+ratingSchema.plugin(mongoosePaginate);
 
-exports.updateRating = async (req, res) => {
-  const rating = await Rating.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
-  res.json(rating);
-};
+const Rating = mongoose.model("Rating", ratingSchema);
 
-exports.deleteRating = async (req, res) => {
-  await Rating.findByIdAndDelete(req.params.id);
-  res.json({ message: "Rating deleted" });
-};
+export default Rating;
