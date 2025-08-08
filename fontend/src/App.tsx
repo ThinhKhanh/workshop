@@ -1,19 +1,21 @@
-import { Route, Routes } from 'react-router-dom'
-import './App.css'
-import ProductListPage from './pages/admin/products/list'
-import ProductEditPage from './pages/admin/products/edit';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/client/Home";
+import InfoPage from "./pages/client/Info";
+import Products from "./pages/client/Products";
+import Contact from "./pages/client/Contact";
 
 function App() {
   return (
-      <>
-          <Routes>
-              <Route path="products">
-                  <Route index element={<ProductListPage />} />
-                  <Route path=":id/edit" element={<ProductEditPage />} />
-              </Route>
-          </Routes>
-      </>
+    <>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/infoPage" element={<InfoPage />} />
+        <Route path="/productPages" element={<Products />} />
+        <Route path="/contactPage" element={<Contact />} />
+      </Routes>
+    </>
   );
 }
 
-export default App
+export default App;
