@@ -8,10 +8,12 @@
       "name": "Auth - Đăng ký",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"userName\": \"testuser\",\n  \"email\": \"testuser@example.com\",\n  \"password\": \"123456\",\n  \"address\": [\"123 Đường ABC\"],\n  \"numberPhone\": \"0909123456\",\n  \"gender\": \"nam\"\n}"
+          "raw": "{\n  \"userName\": \"Nguyen Van A\",\n  \"email\": \"vana@example.com\",\n  \"password\": \"123456\",\n  \"address\": [\"123 Đường ABC\"],\n  \"numberPhone\": \"0909123456\",\n  \"gender\": \"nam\",\n  \"roles\": \"user\"\n}"
         },
         "url": {
           "raw": "http://localhost:8000/api/auth/signup",
@@ -89,6 +91,7 @@
         }
       }
     },
+    
     {
       "name": "User - Cập nhật",
       "request": {

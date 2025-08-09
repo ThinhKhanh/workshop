@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
-// Kiểm tra đăng nhập
 export const isAuth = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
@@ -27,7 +26,7 @@ export const isAuth = async (req, res, next) => {
 
 // Kiểm tra quyền admin
 export const isAdmin = (req, res, next) => {
-  if (!req.user || req.user.roles !== "admin") {
+  if (!req.user || req.user.role !== "admin") {
     return res.status(403).json({ message: "Không có quyền truy cập!" });
   }
   next();

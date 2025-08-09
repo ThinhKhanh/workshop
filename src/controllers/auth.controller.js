@@ -4,25 +4,42 @@ import jwt from "jsonwebtoken";
 
 export const signup = async (req, res) => {
   try {
-    const { userName, email, password, address, numberPhone, gender } = req.body;
+    const { userName, email, password, numberPhone, address, gender, role, adminCode} = req.body;
 
+    // Kiểm tra email đã tồn tại
     const existingUser = await User.findOne({ email });
-    if (existingUser)
+    if (existingUser) {
       return res.status(400).json({ message: "Email đã tồn tại" });
+    }
 
-    const hashedPassword = await bcrypt.hash(password, 8);
-    const user = await User.create({
-      userName,
+    // Nếu role là admin => kiểm tra adminCode
+    let finalRole = "user";
+    if (role === "admin") {
+      if (adminCode !== process.env.ADMIN_KEY) {
+        return res.status(403).json({ message: "Sai mã admin" });
+      }
+      finalRole = "admin";
+    }
+
+    // Mã hóa mật khẩu
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Tạo user
+    const newUser = await User.create({
+     userName,
       email,
       password: hashedPassword,
-      address,
       numberPhone,
+      address,
       gender,
+      role: finalRole
     });
-
-    return res.status(201).json({ message: "Đăng ký thành công", data: user });
+    res.status(201).json({
+      message: "Đăng ký thành công",
+      user: { id: newUser._id, name: newUser.userName, email: newUser.email, role: newUser.role }
+    });
   } catch (error) {
-    return res.status(500).json({ message: "Lỗi server", error: error.message });
+    res.status(500).json({ message: "Lỗi server", error: error.message });
   }
 };
 
@@ -54,9 +71,9 @@ export const signin = async (req, res) => {
       return res.status(500).json({ message: "Lỗi cấu hình máy chủ: thiếu JWT_SECRET" });
     }
 
-    // 5. Tạo JWT token
+    // 5. Tạo JWT token (đồng bộ key => userId)
     const token = jwt.sign(
-      { id: user._id, email: user.email, role: user.role },
+      { userId: user._id, email: user.email, role: user.role },
       jwtSecret,
       { expiresIn: "1h" }
     );
@@ -69,7 +86,7 @@ export const signin = async (req, res) => {
     return res.status(200).json({
       message: "Đăng nhập thành công",
       token,
-      user: userData
+      user:  { id: user._id, name: user.name, email: user.email, role: user.role }
     });
 
   } catch (error) {
