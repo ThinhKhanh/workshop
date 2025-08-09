@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:8000/api";
 const dataProvider = {
   getList: async (resources: any) => {
     const response = await axios.get(`${API_URL}/${resources}`);
