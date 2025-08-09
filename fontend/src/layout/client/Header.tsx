@@ -24,7 +24,7 @@ const Header = () => {
             Trang chủ
           </Link>
           <Link
-            to="infoPage"
+            to="/infoPage"
             className="font-medium hover:text-primary transition-colors"
           >
             Giới thiệu
@@ -43,7 +43,10 @@ const Header = () => {
           </Link>
         </nav>
         <div className="flex items-center space-x-2 md:space-x-4">
-          <a href="#" className="p-2 hover:text-primary transition-colors">
+          <Link
+            to="/loginPage"
+            className="p-2 hover:text-primary transition-colors"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -58,9 +61,9 @@ const Header = () => {
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
               />
             </svg>
-          </a>
-          <a
-            href="cart.html"
+          </Link>
+          <Link
+            to="/cartPage"
             className="p-2 hover:text-primary transition-colors relative"
           >
             <svg
@@ -80,7 +83,7 @@ const Header = () => {
             <span className="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
               0
             </span>
-          </a>
+          </Link>
         </div>
       </header>
     </>

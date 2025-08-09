@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import bcrypt from "bcryptjs"; 
 
 export const userList = async (req, res) => {
   try {
@@ -35,7 +36,7 @@ export const deleteUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const { userName, email, password, address, numberPhone, gender, roles } = req.body;
+    const { userName, email, password, address, numberPhone, gender, role } = req.body;
 
     const exist = await User.findOne({ email });
     if (exist) return res.status(400).json({ message: "Email đã tồn tại" });
@@ -49,7 +50,7 @@ export const createUser = async (req, res) => {
       address,
       numberPhone,
       gender,
-      roles,
+      role,
     });
 
     res.status(201).json({ message: "Tạo người dùng thành công", data: user });

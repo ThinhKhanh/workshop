@@ -1,0 +1,612 @@
+{
+  "info": {
+    "name": "Du An Xuong API CRUD",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Đăng ký",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userName\": \"Nguyen Van A\",\n  \"email\": \"vana@example.com\",\n  \"password\": \"123456\",\n  \"address\": [\"123 Đường ABC\"],\n  \"numberPhone\": \"0909123456\",\n  \"gender\": \"nam\",\n  \"roles\": \"user\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/auth/signup",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "auth", "signup"]
+        }
+      }
+    },
+    {
+      "name": "Auth - Đăng nhập",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/auth/signin",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "auth", "signin"]
+        }
+      }
+    },
+    {
+      "name": "User - Lấy danh sách",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": {
+          "raw": "http://localhost:8000/api/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "users"]
+        }
+      }
+    },
+    {
+      "name": "User - Tạo mới",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userName\": \"admin2\",\n  \"email\": \"admin2@example.com\",\n  \"password\": \"123456\",\n  \"address\": [\"456 Đường DEF\"],\n  \"numberPhone\": \"0909123457\",\n  \"gender\": \"nữ\",\n  \"roles\": \"admin\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "users"]
+        }
+      }
+    },
+    {
+      "name": "User - Lấy theo ID",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": {
+          "raw": "http://localhost:8000/api/users/{{userId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "users", "{{userId}}"]
+        }
+      }
+    },
+    
+    {
+      "name": "User - Cập nhật",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userName\": \"admin2 updated\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/users/{{userId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "users", "{{userId}}"]
+        }
+      }
+    },
+    {
+      "name": "User - Xoá",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": {
+          "raw": "http://localhost:8000/api/users/{{userId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["api", "users", "{{userId}}"]
+        }
+      }
+    },
+    {
+      "name": "Category - Lấy tất cả",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/category",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["category"]
+        }
+      }
+    },
+    {
+      "name": "Category - Tạo mới",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Áo thun\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/category",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["category"]
+        }
+      }
+    },
+    {
+      "name": "Category - Cập nhật",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Áo khoác\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/category/{{categoryId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["category", "{{categoryId}}"]
+        }
+      }
+    },
+    {
+      "name": "Category - Xoá",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:8000/category/{{categoryId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["category", "{{categoryId}}"]
+        }
+      }
+    },
+    {
+      "name": "Products - Lấy tất cả",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/products",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["products"]
+        }
+      }
+    },
+    {
+      "name": "Products - Tạo mới",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Áo thun nam basic\",\n  \"slug\": \"ao-thun-nam-basic\",\n  \"description\": \"Áo thun cotton 100% cho nam\",\n  \"price\": 150000,\n  \"stock\": 50,\n  \"discountPrice\": 120000,\n  \"image\": \"https://example.com/images/ao-thun-nam.jpg\",\n  \"status\": \"in stock\",\n  \"category_id\": \"{{categoryId}}\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/products",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["products"]
+        }
+      }
+    },
+    {
+      "name": "Products - Lấy theo ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/products/{{productId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["products", "{{productId}}"]
+        }
+      }
+    },
+    {
+      "name": "Products - Cập nhật",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Áo thun nam basic update\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/products/{{productId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["products", "{{productId}}"]
+        }
+      }
+    },
+    {
+      "name": "Products - Xoá",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:8000/products/{{productId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["products", "{{productId}}"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Lấy tất cả",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/cart",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["cart"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Thêm sản phẩm",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"product_id\": \"{{productId}}\",\n  \"customer_id\": \"{{userId}}\",\n  \"quantity\": 2,\n  \"total_price\": 300000\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/cart",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["cart"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Lấy theo ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/cart/{{cartId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["cart", "{{cartId}}"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Cập nhật",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 3\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/cart/{{cartId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["cart", "{{cartId}}"]
+        }
+      }
+    },
+    {
+      "name": "Cart - Xoá",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:8000/cart/{{cartId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["cart", "{{cartId}}"]
+        }
+      }
+    },
+    {
+      "name": "Order - Lấy tất cả",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/orders",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["orders"]
+        }
+      }
+    },
+    {
+      "name": "Order - Tạo mới",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customer_id\": \"{{userId}}\",\n  \"order_date\": \"2025-08-08T10:00:00.000Z\",\n  \"price\": 150000,\n  \"total_price\": 300000,\n  \"quantity\": 2,\n  \"status\": \"Chờ xử lý\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/orders",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["orders"]
+        }
+      }
+    },
+    {
+      "name": "Order - Lấy theo ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/orders/{{orderId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["orders", "{{orderId}}"]
+        }
+      }
+    },
+    {
+      "name": "Order - Cập nhật trạng thái",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"Đang giao hàng\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/orders/{{orderId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["orders", "{{orderId}}"]
+        }
+      }
+    },
+    {
+      "name": "Order - Xoá",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:8000/orders/{{orderId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["orders", "{{orderId}}"]
+        }
+      }
+    },
+    {
+      "name": "Order Detail - Lấy tất cả",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/order-details",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["order-details"]
+        }
+      }
+    },
+    {
+      "name": "Order Detail - Tạo mới",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"order_id\": \"{{orderId}}\",\n  \"product_id\": \"{{productId}}\",\n  \"price\": 150000,\n  \"quantity\": 2\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/order-details",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["order-details"]
+        }
+      }
+    },
+    {
+      "name": "Order Detail - Lấy theo order_id",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/order-details/order/{{orderId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["order-details", "order", "{{orderId}}"]
+        }
+      }
+    },
+    {
+      "name": "Order Detail - Cập nhật",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"quantity\": 3\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/order-details/{{orderDetailId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["order-details", "{{orderDetailId}}"]
+        }
+      }
+    },
+    {
+      "name": "Order Detail - Xoá",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:8000/order-details/{{orderDetailId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["order-details", "{{orderDetailId}}"]
+        }
+      }
+    },
+    {
+      "name": "Rating - Lấy tất cả",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/ratings",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["ratings"]
+        }
+      }
+    },
+    {
+      "name": "Rating - Tạo mới",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customer_id\": \"{{userId}}\",\n  \"product_id\": \"{{productId}}\",\n  \"rating_date\": \"2025-08-08T10:00:00.000Z\",\n  \"commit\": \"Sản phẩm rất tốt\",\n  \"star\": 5\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/ratings",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["ratings"]
+        }
+      }
+    },
+    {
+      "name": "Rating - Lấy theo ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/ratings/{{ratingId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["ratings", "{{ratingId}}"]
+        }
+      }
+    },
+    {
+      "name": "Rating - Cập nhật",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"commit\": \"Đã cập nhật đánh giá\",\n  \"star\": 4\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/ratings/{{ratingId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["ratings", "{{ratingId}}"]
+        }
+      }
+    },
+    {
+      "name": "Rating - Xoá",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:8000/ratings/{{ratingId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["ratings", "{{ratingId}}"]
+        }
+      }
+    },
+    {
+      "name": "SlideShow - Lấy tất cả",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8000/banners",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["banners"]
+        }
+      }
+    },
+    {
+      "name": "SlideShow - Tạo mới",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"banner\": [\"https://example.com/images/banner1.jpg\", \"https://example.com/images/banner2.jpg\"]\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/banners",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["banners"]
+        }
+      }
+    },
+    {
+      "name": "SlideShow - Xoá",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:8000/banners/{{bannerId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["banners", "{{bannerId}}"]
+        }
+      }
+    }
+  ]
+}

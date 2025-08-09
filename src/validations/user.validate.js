@@ -38,7 +38,7 @@ export const createUserSchema = Joi.object({
     "any.only": "Giới tính chỉ được là 'nam' hoặc 'nữ'",
   }),
 
-  roles: Joi.string().valid("user", "admin").messages({
+  role: Joi.string().valid("user", "admin").messages({
     "any.only": "Quyền chỉ được là 'user' hoặc 'admin'",
   }),
 });
@@ -51,7 +51,7 @@ export const updateUserSchema = createUserSchema.fork(
     "numberPhone",
     "address",
     "gender",
-    "roles",
+    "role",
   ],
   (schema) => schema.optional()
 );

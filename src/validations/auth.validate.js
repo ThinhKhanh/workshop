@@ -20,7 +20,11 @@ export const signupSchema = Joi.object({
   }),
   gender: Joi.string().valid("nam", "nữ").messages({
     "any.only": "Giới tính chỉ được là 'nam' hoặc 'nữ'"
-  })
+  }),
+  role: Joi.string().valid("user", "admin").default("user").messages({
+    "any.only": "Quyền chỉ được là 'user' hoặc 'admin'"
+  }),
+  adminCode: Joi.string()
 });
 
 export const signinSchema = Joi.object({
