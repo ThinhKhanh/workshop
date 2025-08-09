@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Footer from "../../layout/client/Footer";
 import Header from "../../layout/client/Header";
 
@@ -36,9 +37,9 @@ const LoginPage = () => {
               Đăng nhập
             </button>
             <div className="mt-4 text-center">
-              <a href="signup.html" className="text-primary hover:underline">
+              <Link to="/registerPage" className="text-primary hover:underline">
                 Chưa có tài khoản? Đăng ký
-              </a>
+              </Link>
             </div>
           </form>
         </div>
