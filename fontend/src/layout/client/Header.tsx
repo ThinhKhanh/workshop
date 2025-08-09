@@ -18,7 +18,7 @@ const Header = () => {
         </div>
         <nav className="hidden md:flex space-x-8">
           <Link
-            to="/home"
+            to="/"
             className="font-medium hover:text-primary transition-colors"
           >
             Trang chủ
