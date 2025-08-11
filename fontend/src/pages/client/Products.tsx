@@ -56,7 +56,7 @@ const Products = () => {
               </span>
               <a
                 href="product-detail.html"
-                className="mt-auto bg-blue-300 text-white px-6 py-2 rounded-full hover:bg-blue-400 hover:bg-blue-400"
+                className="mt-auto bg-blue-300 text-white px-6 py-2 rounded-full hover:bg-blue-400"
               >
                 Mua ngay
               </a>
