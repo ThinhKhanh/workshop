@@ -9,6 +9,8 @@ export const ProductSchema = Joi.object({
     "string.base": "Slug phải là chuỗi",
     "any.required": "Slug là bắt buộc",
   }),
+  description: Joi.string().allow("").optional(),
+
   price: Joi.number().required().messages({
     "number.base": "Giá phải là số",
     "any.required": "Giá là bắt buộc",
@@ -17,6 +19,11 @@ export const ProductSchema = Joi.object({
     "number.base": "Tồn kho phải là số",
     "any.required": "Tồn kho là bắt buộc",
   }),
+
+  discountPrice: Joi.number().optional(),
+  image: Joi.string().uri().optional(),
+  status: Joi.string().valid("in stock", "out stock").optional(),
+  category_id: Joi.string().optional()
 });
 
 export const updateProductSchema = ProductSchema.fork(
