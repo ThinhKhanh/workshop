@@ -56,7 +56,7 @@ const Sidebar = () => {
                 </li>
                 <li className="mb-1">
                   <Link
-                    to="/listProductPage"
+                    to="listProductPage"
                     className="flex items-center px-4 py-3 rounded-md text-gray-500 hover:bg-gray-100 hover:text-indigo-600 transition"
                   >
                     <i className="fas fa-shopping-cart w-6 text-sm"></i>

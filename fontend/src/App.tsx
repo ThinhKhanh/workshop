@@ -11,16 +11,20 @@ import CartPage from "./pages/client/Cart";
 import CheckoutPage from "./pages/client/checkout";
 import HistoryOrder from "./pages/client/historeOrder";
 import PrivateRoute from "./components/PrivateRoute";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
+import ProductListPage from "./pages/admin/products/list";
+import ProductAdd from "./pages/admin/products/Add";
+import ProductEditPage from "./pages/admin/products/edit";
 
 function App() {
   return (
     <>
-      <Routes>
+        <Routes>
         {/* Auth routes */}
         <Route path="/loginPage" element={<LoginPage />} />
         <Route path="/registerPage" element={<RegisterPage />} />
 
-        {/* Client routes (yêu cầu đăng nhập) */}
+        {/* Client routes */}
         <Route
           index
           element={
@@ -85,6 +89,20 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        {/* Admin routes */}
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        >
+          <Route path="listProductPage" element={<ProductListPage />} />
+          <Route path="productAdd" element={<ProductAdd />} />
+          <Route path="productEdit/:id" element={<ProductEditPage />} />
+        </Route>
       </Routes>
     </>
   );

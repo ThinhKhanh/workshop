@@ -28,7 +28,7 @@ const Header = () => {
 
           <div className="w-8 h-8 rounded-full overflow-hidden md:hidden">
             <img
-              src="https://via.placeholder.com/32"
+              src="https://via.placeholder.com/40"
               alt="User"
               className="w-full h-full object-cover"
             />
