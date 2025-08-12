@@ -6,11 +6,17 @@ import cartRouter from "./routers/cart.router.js";
 import { connectDB } from "./config/database.js";
 import userRouter from "./routers/user.router.js";
 import authRouter from "./routers/auth.router.js";
+import cors from "cors";
 
 dotenv.config();
 connectDB();
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+  origin: "http://localhost:5173", 
+  credentials: true
+}));
 
 app.use('/api/products', productRouter);
 app.use('/api/category', categoriesRouter);
